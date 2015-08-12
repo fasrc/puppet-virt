@@ -116,7 +116,7 @@ Facter.add("virt_domains_active") do
       $c.list_domains.each do |domid|
         domains.concat([ $c.lookup_domain_by_id(domid.to_i).name ])
       end
-      domains.join(',')
+      domains
     rescue Libvirt::Error, NoMethodError
       nil
     end
@@ -242,7 +242,6 @@ Facter.add("virt_storage_pools_inactive") do
       $c.list_defined_storage_pools.each do |pool|
         pools.concat([ pool ])
       end
-      $c.close
       pools.join(',')
     rescue Libvirt::Error, NoMethodError
       nil
